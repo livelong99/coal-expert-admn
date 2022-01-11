@@ -7,7 +7,7 @@ const Ship = ({editShp, data}) => {
             <div className='idC'>
                 <p>{data.id}</p>
             </div>
-            <div className='docL'>
+            <div onClick={() => {window.open(data.reportLink, "_blank")}} className='docL'>
                 <p>Report</p>
                 <img src="./Images/doc.svg" alt="" />
             </div>
