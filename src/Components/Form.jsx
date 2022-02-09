@@ -8,10 +8,12 @@ const Form = ({shpData, closeFrm}) => {
     const setShip = async () => {
 
         console.log(data);
+        setData({...data, quantity: parseFloat(data.quantity), rate: parseFloat(data.rate)});
+
 
         const setD = await axios
           .post("https://coal-expert-back.herokuapp.com/set-ship", {
-              data: data
+              data: {...data, quantity: parseFloat(data.quantity), rate: parseFloat(data.rate)}
           })
           .then((t)=>
               t.data
@@ -52,7 +54,7 @@ const Form = ({shpData, closeFrm}) => {
                         <label for="destination" class="form__label">Destination Port</label>
                     </div>
                     <div className='Input short'>
-                        <input value={data.quantity} onChange={(event) => {setData({...data, quantity: parseFloat(event.target.value)})}} id="quan" type="text" autoComplete='off' placeholder=" "/>
+                        <input value={data.quantity} onChange={(event) => {setData({...data, quantity: event.target.value})}} id="quan" type="text" autoComplete='off' placeholder=" "/>
                         <label for="quan" class="form__label">Total Quantity</label>
                         <div className='postfix'><p>MT</p></div>
                     </div>
@@ -65,7 +67,7 @@ const Form = ({shpData, closeFrm}) => {
                         <label for="gn" class="form__label">NAR</label>
                     </div>
                     <div className='Input short'>
-                        <input style={{paddingLeft: "40px"}} value={data.rate} onChange={(event) => {setData({...data, rate: parseFloat(event.target.value)})}} id="rate" type="text" autoComplete='off' placeholder=" "/>
+                        <input style={{paddingLeft: "40px"}} value={data.rate} onChange={(event) => {setData({...data, rate: event.target.value})}} id="rate" type="text" autoComplete='off' placeholder=" "/>
                         <label style={{left: "30px"}} for="rate" class="form__label">Rate</label>                        
                         <div className='prefix'><p>₹</p></div>
                         <div style={{right: "0px"}} className='postfix'><p>/MT</p></div>

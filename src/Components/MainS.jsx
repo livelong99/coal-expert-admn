@@ -59,9 +59,13 @@ const MainS = () => {
     }
 
     useEffect(() => {
-        if(orders.length === 0 && getL===0){
+        // if(orders.length === 0 && getL===0){
+        //     setGL(1);
+        //     getOrders();
+        // }
+        if(list.length === 0 && getL===0){
             setGL(1);
-            getOrders();
+            getList();
         }
     })
 
