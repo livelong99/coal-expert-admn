@@ -52,7 +52,7 @@ const Form = ({shpData, closeFrm}) => {
                         <label for="destination" class="form__label">Destination Port</label>
                     </div>
                     <div className='Input short'>
-                        <input value={data.quantity} onChange={(event) => {setData({...data, quantity: parseInt(event.target.value)})}} id="quan" type="text" autoComplete='off' placeholder=" "/>
+                        <input value={data.quantity} onChange={(event) => {setData({...data, quantity: parseFloat(event.target.value)})}} id="quan" type="text" autoComplete='off' placeholder=" "/>
                         <label for="quan" class="form__label">Total Quantity</label>
                         <div className='postfix'><p>MT</p></div>
                     </div>
@@ -65,7 +65,7 @@ const Form = ({shpData, closeFrm}) => {
                         <label for="gn" class="form__label">NAR</label>
                     </div>
                     <div className='Input short'>
-                        <input style={{paddingLeft: "40px"}} value={data.rate} onChange={(event) => {setData({...data, rate: parseInt(event.target.value)})}} id="rate" type="text" autoComplete='off' placeholder=" "/>
+                        <input style={{paddingLeft: "40px"}} value={data.rate} onChange={(event) => {setData({...data, rate: parseFloat(event.target.value)})}} id="rate" type="text" autoComplete='off' placeholder=" "/>
                         <label style={{left: "30px"}} for="rate" class="form__label">Rate</label>                        
                         <div className='prefix'><p>₹</p></div>
                         <div style={{right: "0px"}} className='postfix'><p>/MT</p></div>
