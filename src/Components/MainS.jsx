@@ -10,7 +10,7 @@ const MainS = () => {
     const [list, setList] = useState([]);
     const [getL, setGL] = useState(0);
     const [shpD, setShpD] = useState(0);
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
     const [orders, setOrders] = useState([]);
 
     const getOrders = () => {
