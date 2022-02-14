@@ -59,12 +59,12 @@ const Form = ({shpData, closeFrm}) => {
                         <div className='postfix'><p>MT</p></div>
                     </div>
                     <div className='Input vShort'>
-                        <input value={data.gar} onChange={(event) => {setData({...data, gar: event.target.value})}} id="gn" type="text" autoComplete='off' placeholder=" "/>
-                        <label for="gn" class="form__label">GAR</label>
+                        <input onChange={(event) => {setData({...data, gnar: "GAR : " + event.target.value})}} id="gar" type="text" autoComplete='off' placeholder=""/>
+                        <label for="gar" class="form__label">GAR</label>
                     </div>
                     <div className='Input vShort'>
-                        <input value={data.nar} onChange={(event) => {setData({...data, nar: event.target.value})}} id="gn" type="text" autoComplete='off' placeholder=" "/>
-                        <label for="gn" class="form__label">NAR</label>
+                        <input onChange={(event) => {setData({...data, gnar: "NAR : " + event.target.value})}} id="nar" type="text" autoComplete='off' placeholder=""/>
+                        <label for="nar" class="form__label">NAR</label>
                     </div>
                     <div className='Input short'>
                         <input style={{paddingLeft: "40px"}} value={data.rate} onChange={(event) => {setData({...data, rate: event.target.value})}} id="rate" type="text" autoComplete='off' placeholder=" "/>

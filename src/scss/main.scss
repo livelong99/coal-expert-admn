@@ -276,16 +276,50 @@ body{
                 padding-left: 40px;
                 margin-top: 30px;
                 text-align: left;
-                font-size: 20px;
+                font-size: 15px;
                 color: #000000;
                 font-family: $fontFamily;
                 font-weight: 400;
+
+                span{
+                    padding-left: 40px;
+                }
 
                 b{
                     font-weight: 600;
                 }
             }
 
+            .delBtn{
+                position: absolute;
+                bottom: 30px;
+                right: 120px;
+                width: 100px;
+                height: 30px;
+                border-radius: 10px;
+                cursor: pointer;
+                background-color: #940202;
+
+                p{
+                    width: 90%;
+                    transform: translateY(-50%);
+                    padding-left: 10%;
+                    text-align: left;
+                    font-size: 15px;
+                    color: #FFFFFF;
+                    font-family: $fontFamily;
+                    font-weight: 600;
+                }
+
+                img{
+                    position: absolute;
+                    height: 50%;
+                    right: 10px;
+                    top: 25%;
+
+                }
+            }
+            
             .editBtn{
                 position: absolute;
                 bottom: 30px;
@@ -315,7 +349,6 @@ body{
 
                 }
             }
-            
         }
     }
 

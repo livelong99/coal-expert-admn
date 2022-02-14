@@ -49,11 +49,27 @@ const MainS = () => {
         setForm(1);
     }
 
+    const deleteShp = async (id) => {
+        const delD = await axios
+          .post("https://coal-expert-back.herokuapp.com/del-ship", {
+              id: id
+          })
+          .then((t)=>
+              t.data
+          )
+
+        if(delD.status === 'ok'){
+            console.log("Ship Deleted");
+            getList();
+        }
+    }
+
     const verifyPayment = (data) => {
 
     }
 
     const closeFrm = () => {
+        getList();
         setForm(0);
         setShpD(0);
     }
@@ -85,7 +101,7 @@ const MainS = () => {
             {(show===false) ? <div className='ListC'>
                 {list.map((shp) => {
                     return(
-                        <Ship editShp={editShp} data={shp.value}/>
+                        <Ship editShp={editShp} deleteShp={deleteShp} data={shp.value}/>
                     )
                 })}
             </div> : <div className='ListC'>
