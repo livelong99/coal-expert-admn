@@ -3,15 +3,18 @@ import Form from './Form';
 import Ship from './Ship';
 import axios from "axios";
 import Order from './Order';
+import OrderDt from './OrderInd';
 
 const MainS = () => {
 
     const [form, setForm] = useState(0);
+    const [orderDet, setOrderDet] = useState(0);
     const [list, setList] = useState([]);
     const [getL, setGL] = useState(0);
     const [shpD, setShpD] = useState(0);
     const [show, setShow] = useState(false);
     const [orders, setOrders] = useState([]);
+    const [orderData, setOrderData] = useState({});
 
     const getOrders = () => {
         const lst = axios
@@ -63,9 +66,16 @@ const MainS = () => {
             getList();
         }
     }
+    
+    const closeOrder = () => {        
+        getOrders();
+        setOrderData({});
+        setOrderDet(0);
+    }
 
-    const verifyPayment = (data) => {
-
+    const openOrder = (data) => {
+        setOrderData(data);
+        setOrderDet(1);
     }
 
     const closeFrm = () => {
@@ -107,11 +117,12 @@ const MainS = () => {
             </div> : <div className='ListC'>
                 {orders.map((order) => {
                     return(
-                        <Order verifyPayment={verifyPayment} data={order}/>
+                        <Order openOrder={openOrder} data={order}/>
                     )
                 })}
             </div>}
             {(form===1) ? <Form shpData={shpD} closeFrm={closeFrm}/> : null}
+            {(orderDet===1) ? <OrderDt data={orderData} closeOrder={closeOrder} /> : null}
         </>
     )
 }
