@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Form from './Form';
 import Ship from './Ship';
 import axios from "axios";
 import Order from './Order';
 import OrderDt from './OrderInd';
+import { CSVLink } from 'react-csv'
+import { auth } from '../fConfig';
 
 const MainS = () => {
 
@@ -15,6 +17,58 @@ const MainS = () => {
     const [show, setShow] = useState(false);
     const [orders, setOrders] = useState([]);
     const [orderData, setOrderData] = useState({});
+    const [users, setUsers] = useState([]);
+    const [ships, setShips] = useState([]);
+    const csvLinkU = useRef() 
+    const csvLinkS = useRef() 
+
+    const downShip = async () => {
+        if(list.length===0){
+            await getList();
+        }
+        var arr = []
+        list.forEach(el => {
+           var element = {
+               ID: el.id,
+               Name: el.value.name,
+               Quantity: el.value.quantity,
+               Rate: el.value.rate,
+               Quality: el.value.gnar,
+               Origin: el.value.originCntry,
+               Destination: el.value.destination,
+               Additional_1: el.value.add1,
+               Additional_2: el.value.add2,
+               Link: el.value.reportLink                
+           }
+           arr.push(element);            
+        });
+        setShips(arr);
+        console.log(arr);
+        csvLinkS.current.link.click()
+    }
+
+    const downPhone = async () =>  {
+        await axios
+            .get("https://coal-expert-back.herokuapp.com/get-all-users")
+            .then((response) => {
+                var arr = []
+                response.data.forEach((el) => {
+                    var element = {
+                        ID: el.id,
+                        Name: el.Cname,
+                        Phone: el.Contact,
+                        Email: el.Email,
+                        GST: el.GST,
+                        TnC: el.TnC
+                    }
+                    arr.push(element);
+                })
+                setUsers(arr);
+                csvLinkU.current.link.click()
+            })
+
+            
+    }
 
     const getOrders = () => {
         const lst = axios
@@ -78,6 +132,12 @@ const MainS = () => {
         setOrderDet(1);
     }
 
+    const logOut = async () => {
+        await auth.signOut();
+        window.location.reload();
+
+    }
+
     const closeFrm = () => {
         getList();
         setForm(0);
@@ -99,13 +159,36 @@ const MainS = () => {
         <>
             <div className='TopC'>
                 <div className='logo'>
-                    <img src="./Images/DummyLogo.png" alt="" />
+                    <img src="./Images/logoIcon.svg" alt="" />
                 </div>
+                <div onClick={downPhone} className='download'>   
+                    <p>Download Users</p>                 
+                </div>
+                <CSVLink 
+                        data={users}
+                        filename='users.csv'
+                        className='hidden'
+                        ref={csvLinkU}
+                        target='_blank'
+                    />
                 <div onClick={(show===false) ? () => {setForm(1)} : null} className='primaryBtn'>
                     <p>{(show===false) ? "Add to List" : "Orders"}</p>
                 </div>
                 <div onClick={Navigate} className='secondaryBtn'>
                     <img src={(show===false) ? "./Images/orders.svg" : "./Images/add.svg"} alt="" />
+                </div>
+                <div onClick={downShip} className='download'>   
+                    <p>Download Ships</p>           
+                </div>
+                <CSVLink 
+                        data={ships}
+                        filename='ships.csv'
+                        className='hidden'
+                        ref={csvLinkS}
+                        target='_blank'
+                    />
+                <div style={{backgroundColor: "rgb(185, 74, 74)"}} onClick={logOut} className='download'>   
+                    <p>Log out</p>           
                 </div>
             </div>
             {(show===false) ? <div className='ListC'>

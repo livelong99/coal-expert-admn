@@ -82,9 +82,9 @@ const OrderDt = ({closeOrder, data}) => {
                         </p>
                     </div>
                 </div>
-                <div onClick={verify} className='submitBtn'>
+                {(data.main.status===1) ? null : <div onClick={verify} className='submitBtn'>
                     <p>Proceed</p>
-                </div>
+                </div> }
             </div>
         </div>
     )
